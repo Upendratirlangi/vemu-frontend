@@ -27,9 +27,9 @@ const navConfig = {
     { path: '/faculty/reports',      label: 'Reports',      icon: '📋' },
   ],
   student: [
-    { path: '/student',       label: 'Dashboard', icon: '📊', exact: true },
+    { path: '/student',         label: 'Dashboard', icon: '📊', exact: true },
     { path: '/student/marks',   label: 'My Marks',  icon: '📋' },
-    { path: '/student/reports', label: 'Reports',    icon: '📊' },
+    { path: '/student/reports', label: 'Reports',   icon: '📊' },
   ],
 };
 
@@ -63,7 +63,11 @@ export default function Layout() {
     <div className="layout">
 
       {/* Mobile overlay */}
-      <div className={`sidebar-overlay ${sidebarOpen ? 'visible' : ''}`} onClick={closeSidebar} />
+      <div
+        className={`sidebar-overlay ${sidebarOpen ? 'visible' : ''}`}
+        onClick={closeSidebar}
+        aria-hidden="true"
+      />
 
       {/* Sidebar */}
       <aside className={`sidebar ${sidebarOpen ? 'mobile-open' : ''}`}>
@@ -106,7 +110,14 @@ export default function Layout() {
       {/* Main content */}
       <div className="main-content">
         <header className="topbar">
-          <button className="hamburger" onClick={() => setSidebarOpen(o => !o)}>☰</button>
+          <button
+            className="hamburger"
+            onClick={() => setSidebarOpen(o => !o)}
+            aria-label="Toggle navigation menu"
+            aria-expanded={sidebarOpen}
+          >
+            {sidebarOpen ? '✕' : '☰'}
+          </button>
           <div style={{ display:'flex', alignItems:'center', gap:10, flex:1, minWidth:0 }}>
             <img src={vemuLogo} alt="VEMU"
               style={{ width:36, height:36, borderRadius:'50%', objectFit:'cover', border:'2px solid #e2e8f0', flexShrink:0 }} />
@@ -127,7 +138,6 @@ export default function Layout() {
           </div>
         </header>
 
-        {/* ── Page body — clean light background, no image ── */}
         <main className="page-body">
           <Outlet />
         </main>

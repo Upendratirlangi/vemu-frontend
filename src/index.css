@@ -1003,3 +1003,102 @@ tbody tr:hover { background: #f0f6ff !important; transform: translateX(3px); }
 @media (max-width: 768px) {
   .modal { max-width: 100% !important; }
 }
+
+/* ════════════════════════════════════════════════════════════
+   MOBILE RESPONSIVE PATCHES (Added Fix)
+   ════════════════════════════════════════════════════════════ */
+
+/* Ensure sidebar is always fixed+hidden on small screens */
+@media (max-width: 768px) {
+  /* Force sidebar off-screen by default */
+  .sidebar {
+    position: fixed !important;
+    top: 0; left: 0; bottom: 0;
+    height: 100vh;
+    transform: translateX(-100%) !important;
+    transition: transform 0.3s ease;
+    z-index: 300;
+    width: min(280px, 85vw) !important;
+  }
+  .sidebar.mobile-open {
+    transform: translateX(0) !important;
+  }
+
+  /* Main content takes full width when sidebar hidden */
+  .main-content {
+    width: 100% !important;
+    margin-left: 0 !important;
+  }
+
+  /* Overlay above content but below sidebar */
+  .sidebar-overlay {
+    z-index: 250 !important;
+  }
+
+  /* Hamburger always visible on mobile */
+  .hamburger {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+    min-height: 40px;
+    font-size: 22px;
+  }
+
+  /* Hide topbar-right completely on mobile */
+  .topbar-right { display: none !important; }
+
+  /* Topbar padding fix */
+  .topbar { padding: 0 12px !important; gap: 8px; }
+
+  /* Prevent horizontal overflow everywhere */
+  .page-body { overflow-x: hidden; }
+
+  /* Fix filter bars overflowing */
+  .filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .filter-bar > * { flex: 1 1 140px; min-width: 0; }
+
+  /* Fix action buttons wrapping */
+  .page-header {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .page-header .page-actions {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  /* Tables always scrollable */
+  .table-responsive, .table-wrapper {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+    display: block;
+    width: 100%;
+  }
+
+  /* Fix card padding for small screens */
+  .card { border-radius: 8px; }
+
+  /* Student marks table scrollable */
+  .student-marks-table,
+  .marks-table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* Very small phones (under 360px) */
+@media (max-width: 360px) {
+  .stats-grid { grid-template-columns: 1fr 1fr !important; gap: 8px; }
+  .stat-value { font-size: 16px !important; }
+  .stat-label { font-size: 10px !important; }
+  .topbar-title { font-size: 13px !important; }
+  .btn { padding: 6px 10px !important; font-size: 11px !important; }
+  .page-body { padding: 10px 8px !important; }
+}
